@@ -20,13 +20,13 @@ pipeline {
             }
         }
 
-        stage('Maven Build') {
-            steps {
-                sh 'mvn clean package'
-            }
-        }
-    }
-}
+//         stage('Maven Build') {
+//             steps {
+//                 sh 'mvn clean package'
+//             }
+//         }
+//     }
+// }
 // stage('Maven Build') {
 //     steps {
 //         sh '''
@@ -37,18 +37,18 @@ pipeline {
 // }
 //     }
 // }
-// stage('Debug Environment') {
-//     steps {
-//         sh '''
-//         whoami
-//         echo "PATH=$PATH"
-//         which java
-//         java -version
-//         which mvn
-//         mvn -version
-//         '''
-//     }
-// }
-//     }
-// }
+stage('Debug Environment') {
+    steps {
+        sh '''
+        whoami
+        echo "PATH=$PATH"
+        which java
+        java -version
+        which mvn
+        mvn -version
+        '''
+    }
+}
+    }
+}
 
