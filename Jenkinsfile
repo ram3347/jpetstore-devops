@@ -25,6 +25,11 @@ pipeline {
                 sh 'mvn clean package'
             }
         }
+                stage('Docker Build') {
+            steps {
+                sh 'docker build -f Dockerfile.tomcat -t jpetstore:1.0 .'
+            }
+        }
     }
 }
 // stage('Maven Build') {
