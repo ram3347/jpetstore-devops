@@ -46,11 +46,26 @@ pipeline {
             }
                 }
 
-                stage('SSH to EC2') {
+//                 stage('SSH to EC2') {
+//     steps {
+//         sshagent(['ec2-ssh']) {
+//             sh '''
+//                 ssh -o StrictHostKeyChecking=no ec2-user@3.108.62.130 "hostname"
+//             '''
+//         }
+//     }
+// }
+
+stage('SSH to EC2') {
     steps {
         sshagent(['ec2-ssh']) {
             sh '''
-                ssh -o StrictHostKeyChecking=no ec2-user@3.108.62.130 "hostname"
+                ssh -o StrictHostKeyChecking=no ec2-user@3.108.62.130 "
+                    docker pull ramvasanthhh/jpetstore:1.0
+                    docker stop jpetstore || true
+                    docker rm jpetstore || true
+                    docker run -d --name jpetstore -p 8080:8080 ramvasanthhh/jpetstore:1.0
+                "
             '''
         }
     }
