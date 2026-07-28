@@ -30,6 +30,21 @@ pipeline {
                 sh 'docker build -f Dockerfile.tomcat -t jpetstore:1.0 .'
             }
         }
+                stage('Docker Push') {
+            steps {
+                withCredentials([usernamePassword(
+                    credentialsId: 'dockerhub-creds',
+                    usernameVariable: 'DOCKER_USER',
+                    passwordVariable: 'DOCKER_PASS'
+                )]) {
+                    sh '''
+                        docker login -u $DOCKER_USER -p $DOCKER_PASS
+                        docker tag jpetstore:1.0 $DOCKER_USER/jpetstore:1.0
+                        docker push $DOCKER_USER/jpetstore:1.0
+                    '''
+                }
+            }
+                }
     }
 }
 // stage('Maven Build') {
