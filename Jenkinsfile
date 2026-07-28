@@ -64,7 +64,7 @@ stage('SSH to EC2') {
                     docker pull ramvasanthhh/jpetstore:1.0
                     docker stop jpetstore || true
                     docker rm jpetstore || true
-                    docker run -d --name jpetstore -p 8180:8080 ramvasanthhh/jpetstore:1.0
+                    docker run -d --name jpetstore -p 8081:8080 ramvasanthhh/jpetstore:1.0
                 "
             '''
         }
