@@ -61,7 +61,7 @@ stage('SSH to EC2') {
     steps {
         sshagent(['ec2-ssh']) {
             sh '''
-                ssh -o StrictHostKeyChecking=no ec2-user@3.108.62.130 "
+                ssh -o StrictHostKeyChecking=no ec2-user@13.127.93.10 "
                     docker pull ramvasanthhh/jpetstore:1.0
                     docker stop jpetstore || true
                     docker rm jpetstore || true
