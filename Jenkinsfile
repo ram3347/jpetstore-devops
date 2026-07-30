@@ -30,31 +30,31 @@ pipeline {
                 sh 'docker build -f Dockerfile.tomcat -t jpetstore:1.0 .'
             }
         }
-            //     stage('Docker Push') {
-            // steps {
-            //     withCredentials([usernamePassword(
-            //         credentialsId: 'dockerhub-creds',
-            //         usernameVariable: 'DOCKER_USER',
-            //         passwordVariable: 'DOCKER_PASS'
-            //     )]) {
-            //         sh '''
-            //             docker login -u $DOCKER_USER -p $DOCKER_PASS
-            //             docker tag jpetstore:1.0 $DOCKER_USER/jpetstore:1.0
-            //             docker push $DOCKER_USER/jpetstore:1.0
-            //         '''
-            //     }
-            // }
-            //     }
+                stage('Docker Push') {
+            steps {
+                withCredentials([usernamePassword(
+                    credentialsId: 'dockerhub-creds',
+                    usernameVariable: 'DOCKER_USER',
+                    passwordVariable: 'DOCKER_PASS'
+                )]) {
+                    sh '''
+                        docker login -u $DOCKER_USER -p $DOCKER_PASS
+                        docker tag jpetstore:1.0 $DOCKER_USER/jpetstore:1.0
+                        docker push $DOCKER_USER/jpetstore:1.0
+                    '''
+                }
+            }
+                }
 
-//                 stage('SSH to EC2') {
-//     steps {
-//         sshagent(['ec2-ssh']) {
-//             sh '''
-//                 ssh -o StrictHostKeyChecking=no ec2-user@3.108.62.130 "hostname"
-//             '''
-//         }
-//     }
-// }
+                stage('SSH to EC2') {
+    steps {
+        sshagent(['ec2-ssh']) {
+            sh '''
+                ssh -o StrictHostKeyChecking=no ec2-user@13.127.93.10 "hostname"
+            '''
+        }
+    }
+}
 
 // stage('SSH to EC2') {
 //     steps {
@@ -82,18 +82,18 @@ pipeline {
 // }
 //     }
 // }
-stage('Debug Environment') {
-    steps {
-        sh '''
-        whoami
-        echo "PATH=$PATH"
-        which java
-        java -version
-        which mvn
-        mvn -version
-        '''
-    }
-}
-    }
-}
+// stage('Debug Environment') {
+//     steps {
+//         sh '''
+//         whoami
+//         echo "PATH=$PATH"
+//         which java
+//         java -version
+//         which mvn
+//         mvn -version
+//         '''
+//     }
+// }
+//     }
+// }
 
