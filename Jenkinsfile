@@ -55,6 +55,8 @@ pipeline {
         }
     }
 }
+    }
+}
 
 // stage('SSH to EC2') {
 //     steps {
